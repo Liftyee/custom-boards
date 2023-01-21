@@ -221,11 +221,7 @@ def MakeBoard(name, vendor_name, product_name, vid, pid, pwr, boarddefine, flash
         BuildBoot(name)
     BuildUploadMethodMenu(name)
     MakeBoardJSON(name, vendor_name, product_name, vid, pid, pwr, boarddefine, flashsizemb, boot2, extra)
-    #global pkgjson
-    #thisbrd = {}
-    #thisbrd['name'] = "%s %s" % (vendor_name, product_name)
-    #pkgjson['packages'][0]['platforms'][0]['boards'].append(thisbrd)
-
+    
 def MakeBoardJSON(name, vendor_name, product_name, vid, pid, pwr, boarddefine, flashsizemb, boot2, extra):
     if type(pid) == list:
         pid = pid[0]
@@ -304,20 +300,13 @@ def MakeBoardJSON(name, vendor_name, product_name, vid, pid, pwr, boarddefine, f
     f.write(json)
     f.close()
 
-#pkgjson = json.load(open(os.path.abspath(os.path.dirname(__file__)) + '/../package/package_pico_index.template.json'))
-#pkgjson['packages'][0]['platforms'][0]['boards'] = []
-
 sys.stdout = open(os.path.abspath(os.path.dirname(__file__)) + "/../boards.txt", "w")
 WriteWarning()
 BuildGlobalMenuList()
 
-# Note to new board manufacturers:  Please add your board so that it sorts
-# alphabetically starting with the company name and then the board name.
-# Otherwise it is difficult to find a specific board in the menu.
-
 # Raspberry Pi
-MakeBoard("rpipico", "Raspberry Pi", "Pico", "0x2e8a", "0x000a", 250, "RASPBERRY_PI_PICO", 2, "boot2_w25q080_2_padded_checksum")
-MakeBoard("rpipicow", "Raspberry Pi", "Pico W", "0x2e8a", "0xf00a", 250, "RASPBERRY_PI_PICO_W", 2, "boot2_w25q080_2_padded_checksum")
+# MakeBoard("rpipico", "Raspberry Pi", "Pico", "0x2e8a", "0x000a", 250, "RASPBERRY_PI_PICO", 2, "boot2_w25q080_2_padded_checksum")
+# MakeBoard("rpipicow", "Raspberry Pi", "Pico W", "0x2e8a", "0xf00a", 250, "RASPBERRY_PI_PICO_W", 2, "boot2_w25q080_2_padded_checksum")
 
 # CanSat Primary Mission
 MakeBoard("cansat_primary", "Arctos", "Primary Mission", "0x2e8a", "0x000a", 250, "RASPBERRY_PI_PICO", 16, "boot2_w25q080_2_padded_checksum")
@@ -326,8 +315,6 @@ MakeBoard("cansat_primary", "Arctos", "Primary Mission", "0x2e8a", "0x000a", 250
 MakeBoard("firefly_telems_v2", "Firefly", "Telemetry Unit V2", "0x2e8a", "0x000a", 250, "RASPBERRY_PI_PICO", 16, "boot2_w25q080_2_padded_checksum")
 
 # Generic
-MakeBoard("generic", "Generic", "RP2040", "0x2e8a", "0xf00a", 250, "GENERIC_RP2040", 16, "boot2_generic_03h_4_padded_checksum")
+# MakeBoard("generic", "Generic", "RP2040", "0x2e8a", "0xf00a", 250, "GENERIC_RP2040", 16, "boot2_generic_03h_4_padded_checksum")
 
 sys.stdout.close()
-#with open(os.path.abspath(os.path.dirname(__file__)) + '/../package/package_pico_index.template.json', 'w') as f:
-#    f.write(json.dumps(pkgjson, indent=3))
